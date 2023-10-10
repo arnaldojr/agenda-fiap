@@ -33,10 +33,19 @@ def adicionar_contato(agenda,nome,tel,email,end):
     
     agenda[nome]= novo_contato
     print(f"contato {nome} adicionado com sucesso!!!")
+
+
 def listar_contato():
     pass
-def editar_contato():
-    pass
+def editar_contato(agenda,nome,tel,email,end):
+    novo_contato = {}
+    novo_contato["telefone"] = tel
+    novo_contato["email"] = email
+    novo_contato["endereço"] = end
+    
+    agenda[nome]= novo_contato
+    print(f"contato {nome} adicionado com sucesso!!!")
+
 def excluir_contato(agenda,nome):
     #forma 1
     if nome in agenda:
@@ -64,16 +73,26 @@ while True:
 
     if user_op == "1":
         user_name = input("Nome do contato:")
-        user_tel = input("Tel do contato:")
-        user_email = input("email do contato:")
-        user_end = input("end do contato:")
-        adicionar_contato(agenda,user_name,user_tel,user_email,user_end)
+        if user_name not in agenda:
+            user_tel = input("Tel do contato:")
+            user_email = input("email do contato:")
+            user_end = input("end do contato:")
+            adicionar_contato(agenda,user_name,user_tel,user_email,user_end)
+        else:
+            print(f"Contato {user_name} já existe!")
 
     elif user_op == "2":
         print("opção2")
 
     elif user_op == "3":
-        print("opção3")
+        user_name = input("Nome do contato:")
+        if user_name in agenda:
+            user_tel = input("Tel do contato:")
+            user_email = input("email do contato:")
+            user_end = input("end do contato:")
+            editar_contato(agenda,user_name,user_tel,user_email,user_end)
+        else:
+            print(f"Contato {user_name} não existe!")
 
     elif user_op == "4":
         user_name = input("Escolha o contato para excluir:")
