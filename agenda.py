@@ -36,10 +36,28 @@ def excluir_contato():
 def buscar_contato():
     pass
 
-print("__agenda de contatos__")
-print(" 1. - adicionar contato")
-print(" 2. - listar contato")
-print(" 3. - editar contato")
-print(" 4. - excluir contato")
-print(" 5. - buscar contato")
-user_op = input("Escolha uma opção:")
+
+while True:
+    print("\n__agenda de contatos__\n")
+    print(" 1. - adicionar contato")
+    print(" 2. - listar contato")
+    print(" 3. - editar contato")
+    print(" 4. - excluir contato")
+    print(" 5. - buscar contato")
+    print(" 6. - sair\n")   
+    user_op = input("Escolha uma opção:")
+    if user_op == "1":
+        print("opção1")
+    elif user_op == "2":
+        print("opção2")
+    elif user_op == "3":
+        print("opção3")
+    elif user_op == "4":
+        print("opção4")
+    elif user_op == "5":
+        print("opção5")  
+    elif user_op == "6":
+        print("Obrigado, fechando o programa!!")
+        break
+    else:
+        print(f"opção {user_op} invalida! Escolha uma opção valida.")      
