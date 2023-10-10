@@ -31,8 +31,20 @@ def listar_contato():
     pass
 def editar_contato():
     pass
-def excluir_contato():
-    pass
+def excluir_contato(agenda,nome):
+    #forma 1
+    if nome in agenda:
+        del agenda[nome]
+        print(f"contato {nome} excluido com sucesso. :)")
+    else:
+        print(f"Contato {nome} não existe!")
+    # forma 2
+    #del agenda.get(nome, "não existe")
+    
+
+
+
+
 def buscar_contato():
     pass
 
@@ -53,7 +65,11 @@ while True:
     elif user_op == "3":
         print("opção3")
     elif user_op == "4":
-        print("opção4")
+        user_name = input("Escolha o contato para excluir:")
+        excluir_contato(agenda,user_name)
+
+
+
     elif user_op == "5":
         print("opção5")  
     elif user_op == "6":
