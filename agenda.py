@@ -35,8 +35,14 @@ def adicionar_contato(agenda,nome,tel,email,end):
     print(f"contato {nome} adicionado com sucesso!!!")
 
 
-def listar_contato():
-    pass
+def listar_contato(agenda):
+    print(f"agenda possui {len(agenda)} contatos.")
+    for nome, contato in agenda.items():
+        print(nome)
+        for tipo, valor in contato.items():
+            print(f"{tipo} - {valor}")
+
+
 def editar_contato(agenda,nome,tel,email,end):
     novo_contato = {}
     novo_contato["telefone"] = tel
@@ -44,7 +50,7 @@ def editar_contato(agenda,nome,tel,email,end):
     novo_contato["endereço"] = end
     
     agenda[nome]= novo_contato
-    print(f"contato {nome} adicionado com sucesso!!!")
+    print(f"contato {nome} editado com sucesso!!!")
 
 def excluir_contato(agenda,nome):
     #forma 1
@@ -82,7 +88,7 @@ while True:
             print(f"Contato {user_name} já existe!")
 
     elif user_op == "2":
-        print("opção2")
+        listar_contato(agenda)
 
     elif user_op == "3":
         user_name = input("Nome do contato:")
