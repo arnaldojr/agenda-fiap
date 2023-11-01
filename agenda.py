@@ -30,12 +30,13 @@ def adicionar_contato(agenda,nome,tel,email,end):
 
 
 def listar_contato(agenda):
-    """Lista todos os contatos na agenda."""
-    print(f"agenda possui {len(agenda)} contatos.")
-    for nome, contato in agenda.items():
+    """Lista todos os contatos na agenda, ordenados por nome."""
+    contatos_ordenados = dict(sorted(agenda.items()))
+    print(f"agenda possui {len(contatos_ordenados)} contatos.")
+    for nome, contato in contatos_ordenados.items():
         print(f"\nNome: {nome}")
         for tipo, valor in contato.items():
-            print(f"{tipo} - {valor}")
+            print(f"{tipo}: {valor}")
 
 
 def editar_contato(agenda,nome,tel,email,end):
@@ -71,7 +72,7 @@ def buscar_contato(agenda, nome):
     if contato:
         print(f"\nNome: {nome}")
         for tipo, valor in contato.items():
-            print(f"{tipo} - {valor}")
+            print(f"{tipo}: {valor}")
 
 def salvar_agenda(agenda):
     """Salva a agenda em um arquivo JSON."""
@@ -86,16 +87,36 @@ def carregar_agenda():
     except FileNotFoundError:
         return {}
 
+def exportar_contatos(contatos, nome_arquivo):
+    try:
+        with open(nome_arquivo, 'w') as f:
+            json.dump(contatos, f)
+        print(f"Contatos exportados com sucesso para {nome_arquivo}!")
+    except Exception as e:
+        print(f"Ocorreu um erro ao exportar os contatos: {e}")
+
+def importar_contatos(agenda, nome_arquivo):
+    try:
+        with open(nome_arquivo, 'r') as f:
+            contatos_importados = json.load(f)
+        agenda.update(contatos_importados)
+        print(f"Contatos importados com sucesso de {nome_arquivo}!")
+    except Exception as e:
+        print(f"Ocorreu um erro ao importar os contatos: {e}")
+
+
 def menu():
     agenda = carregar_agenda()
     while True:
         print("\n__agenda de contatos__\n")
-        print(" 1. - adicionar contato")
-        print(" 2. - listar contato")
-        print(" 3. - editar contato")
-        print(" 4. - excluir contato")
-        print(" 5. - buscar contato")
-        print(" 6. - sair\n")   
+        print("1. - adicionar contato")
+        print("2. - listar contato")
+        print("3. - editar contato")
+        print("4. - excluir contato")
+        print("5. - buscar contato")
+        print("6. - Exportar contatos")
+        print("7. - Importar contatos")
+        print("8. - sair\n")   
         user_op = input("Escolha uma opção:")
 
         if user_op == "1":
@@ -128,8 +149,16 @@ def menu():
         elif user_op == "5":
             user_name = input("Encontre o contato:")
             buscar_contato(agenda,user_name)
-
+        
         elif user_op == "6":
+            nome_arquivo = input("Nome do arquivo para exportar os contatos: ")
+            exportar_contatos(agenda, nome_arquivo)
+
+        elif user_op == "7":
+            nome_arquivo = input("Nome do arquivo para importar os contatos: ")
+            importar_contatos(agenda, nome_arquivo)
+
+        elif user_op == "8":
             print("Obrigado, fechando o programa!!")
             salvar_agenda(agenda)
             break
