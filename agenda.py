@@ -1,5 +1,5 @@
-import contatos
-import arquivo
+from contatos import contatos
+from arquivo import arquivo
 
 def menu():
     agenda = arquivo.carregar_agenda()
@@ -76,8 +76,6 @@ def menu():
                 arquivo.salvar_agenda(agenda)
             print("Obrigado, fechando o programa!!")
             break
-        
-
         else:
             print(f"opção {user_op} invalida! Escolha uma opção valida.")      
 

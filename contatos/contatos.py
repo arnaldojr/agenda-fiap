@@ -1,4 +1,4 @@
-import validacao
+import arquivo.validacao as validacao
 
 def adicionar_contato(agenda,nome,tel,email,end):
     """Adiciona um novo contato à agenda."""
