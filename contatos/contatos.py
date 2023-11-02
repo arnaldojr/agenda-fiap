@@ -33,19 +33,21 @@ def listar_contato(agenda):
     for nome, contato in contatos_ordenados.items():
         imprimir_contato(nome, contato)
 
-def editar_contato(agenda,nome,tel,email,end):
+def editar_contato(agenda,nome,tel=None,email=None,end=None):
     """Edita um contato existente na agenda."""
-    if not validacao.validar_telefone(tel):
-        return False
-    if not validacao.validar_email(email):
-        return False
     
-    novo_contato = {}
-    novo_contato["telefone"] = tel
-    novo_contato["email"] = email
-    novo_contato["endereço"] = end
+    contato = agenda[nome]
+    if tel is not None:
+        if not validacao.validar_telefone(tel):
+            return False
+        contato["telefone"] = tel
+    if email is not None:
+        if not validacao.validar_email(email):
+            return False
+        contato["email"] = email
+    if end is not None:
+        contato["endereço"] = end
     
-    agenda[nome]= novo_contato
     return True
 
 def excluir_contato(agenda,nome):
